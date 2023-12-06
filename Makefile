@@ -6,12 +6,12 @@
 #    By: jealefev <jealefev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/29 10:59:04 by jealefev          #+#    #+#              #
-#    Updated: 2023/11/29 10:59:05 by jealefev         ###   ########.fr        #
+#    Updated: 2023/12/06 13:54:32 by jealefev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-SOURCES = ft_tools.c ft_putnbr.c ft_charstr.c
+SOURCES = ft_charstr.c ft_printf.c ft_putnbr.c ft_putnbr_base.c
 OBJECTS = ${SOURCES:.c=.o}
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

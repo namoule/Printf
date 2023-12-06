@@ -6,43 +6,70 @@
 /*   By: jealefev <jealefev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:59:11 by jealefev          #+#    #+#             */
-/*   Updated: 2023/12/06 09:04:59 by jealefev         ###   ########.fr       */
+/*   Updated: 2023/12/06 15:14:35 by jealefev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-
-int	ft_putnbr(long int nb)
+int	ft_putnbr(int nb)
 {
-	int count;
-	int d;
-	int c;
+	char	a;
 
-	c = 0;
-	d = 1;
-	count = 0;
 	if (nb == -2147483648)
-		return(count += ft_putstr("-2147483648"));
-	if(nb < 0)
+		return (ft_putstr("-2147483648"));
+	else if (nb == 2147483647)
+		return (ft_putstr("2147483647"));
+	else if (nb < 0)
 	{
-		nb = nb * -1;
-		count += ft_putchar('-');
+		write(1, "-", 1);
+		ft_putnbr(-nb);
 	}
-	while(d < nb)
-		d = d * 10;
-	while(d > 1)
+	else if (nb > 9)
 	{
-		d = d / 10;
-		c = (nb / d);
-		nb -= c * d;
-		c += '0';
-		count += ft_putchar(c);
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
 	}
-	return(count);
+	else if (nb < 10 && nb >= 0)
+	{
+		a = nb + '0';
+		write(1, &a, 1);
+	}
+	return (0);
 }
-// int main()
-// {
-// 	ft_putnbr(22);
-// 	return(0);
-// }
+
+int	ft_printnbr(int nb)
+{
+	int	i;
+
+	i = 0;
+	if (nb < 0)
+	{
+		ft_putnbr(nb);
+		nb = nb * -1;
+		i++;
+	}
+	else
+		ft_putnbr(nb);
+	while (nb / 10)
+	{
+		nb = nb / 10;
+		i++;
+	}
+	return (i + 1);
+}
+
+int	ft_p(unsigned long long int nb)
+{
+	int	count;
+
+	count = 0;
+	if (nb == 0)
+	{
+		write(1, "(nil)", 5);
+		return (5);
+	}
+	ft_putstr("0x");
+	count += ft_putnbr_base(nb);
+	return (count + 2);
+}
